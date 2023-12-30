@@ -85,11 +85,6 @@ def extract_keywords(data_path, output_path: str):
 
     all_dict = Counter(all_keywords)
 
-    # 在超过三个种类中出现过的词会忽略
-    for word, freq in dict(all_dict).items():
-        if freq >= 3:
-            del all_dict[word]
-
     with open(output_path + 'keywords.pkl', 'wb') as f:
         pickle.dump(all_dict, f)
 
