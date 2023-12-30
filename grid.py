@@ -14,7 +14,6 @@ best_params = {}
 
 scores = []
 
-# 遍历所有参数组合
 for C in C_values:
     # 训练模型, 迭代次数也不断增加保证每次都能收敛
     max_iter = 100000
@@ -34,7 +33,6 @@ for C in C_values:
         best_score = score
         best_params = {'C': C}
 
-# 输出最佳参数组合和得分
 print("Best Parameters:", best_params)
 print("Best Score:", best_score)
 

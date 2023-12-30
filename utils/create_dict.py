@@ -57,7 +57,7 @@ def calculate_chi_square(data_path, word, class_str: str):
     if b == 0:
         return 1
 
-    return (a + b + c + d) * ((a * d - b * c) ** 2) / ((a + c) * (a + b) * (d + b) * (c + d))
+    return (a + b + c + d) * ((a * d - b * c) ** 2) / ((a + c) * (b + d) * (a + b) * (c + d))
 
 
 def extract_keywords(data_path, output_path: str):

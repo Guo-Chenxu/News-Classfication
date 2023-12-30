@@ -31,10 +31,11 @@ def draw_pic(eval_table: DataFrame, pic_path: str = 'evaluation.png'):
 
 def evaluate(csv_path: str, output_path='evaluation.csv') -> float:
     """
-    根据混淆矩阵计算精确率, 召回率和F1值
+    根据混淆矩阵计算正确率, 召回率和F1值
     返回整体的F1值
     """
-    df = pd.read_csv(csv_path, index_col=0)
+    df = pd.read_csv(csv_path, index_col=0).apply(
+        pd.to_numeric, errors='coerce').astype(int)
     pd.set_option('display.max_columns', None)
     print("混淆矩阵: \n", df, "\n")
 

@@ -28,13 +28,12 @@ def train_bayes(_keywords: list, datasets, output: str):
                 else:
                     word_df.at[word, class_name_1] = tf_dict.get(word)
 
-    df_sum = word_df.values.sum()
-
     # 构建条件概率矩阵
     for word in bayes_df.index:
         for class_name_1 in constants.class_list:
+            # 拉普拉斯修正
             bayes_df.at[word, class_name_1] = (word_df.at[word, class_name_1] + 1) / (
-                    word_df[class_name_1].sum() + df_sum)
+                word_df[class_name_1].sum() + len(constants.class_list))
 
     with open(output, 'wb') as file:
         pickle.dump(bayes_df, file)
@@ -68,7 +67,8 @@ def predict_bayes(npz_path, confusion_matrix_path: str, test_size: int, _keyword
     class_index = 0
     for class_name in constants.class_list:
         for i in range(test_size):
-            s = _predict(class_index * test_size + i, column, row, _keywords, bayes_df)
+            s = _predict(class_index * test_size + i,
+                         column, row, _keywords, bayes_df)
             confusion_matrix.at[class_name, s] += 1
         class_index += 1
     confusion_matrix.to_csv(confusion_matrix_path)
@@ -85,7 +85,8 @@ if __name__ == '__main__':
     print('Train time: %s Seconds\n' % (end - start))
 
     start = time.time()
-    predict_bayes('coo_test.npz', 'confusion_matrix_bayes.csv', 5000, keywords, 'pkls/bayes_train.pkl')
+    predict_bayes('coo_test.npz', 'confusion_matrix_bayes.csv',
+                  5000, keywords, 'pkls/bayes_train.pkl')
     end = time.time()
     print('Test time: %s Seconds\n' % (end - start))
 
