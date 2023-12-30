@@ -1,5 +1,3 @@
-import itertools
-
 import pandas as pd
 import matplotlib.pyplot as plt
 
@@ -40,6 +38,7 @@ scores = pd.DataFrame(scores)
 scores.to_csv('linear-c-score.csv', index=False)
 
 plt.rcParams['font.sans-serif'] = ['Microsoft YaHei']
+plt.figure()
 plt.plot(scores['C'], scores['score'], marker='x')
 plt.xscale('log')
 plt.xlabel('C')
