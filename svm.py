@@ -31,7 +31,7 @@ def train_svc(npz_path, output: str, train_size: int, c: float = 0.1, gamma: flo
     start = time.time()
     model.fit(coo_train.tocsr(), train_arr)
     end = time.time()
-    print('Train time: %s Seconds\n' % (end - start))
+    print('Train time: %s seconds\n' % (end - start))
 
     with open(output, 'wb') as f:
         pickle.dump(model, f)
@@ -50,7 +50,7 @@ def predict_svc(test_npz, model_path, confusion_matrix_path: str, test_size: int
     start = time.time()
     pre = model.predict(coo_test.tocsr())
     end = time.time()
-    print('Test time: %s Seconds\n' % (end - start))
+    print('Test time: %s seconds\n' % (end - start))
 
     c = metrics.confusion_matrix(test_arr, pre)
     confusion_matrix = pd.DataFrame(c, columns=constants.class_list,

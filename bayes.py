@@ -82,12 +82,12 @@ if __name__ == '__main__':
     start = time.time()
     train_bayes(keywords, 'pkls/', 'pkls/bayes_train.pkl')
     end = time.time()
-    print('Train time: %s Seconds\n' % (end - start))
+    print('Train time: %s seconds\n' % (end - start))
 
     start = time.time()
     predict_bayes('coo_test.npz', 'confusion_matrix_bayes.csv',
                   5000, keywords, 'pkls/bayes_train.pkl')
     end = time.time()
-    print('Test time: %s Seconds\n' % (end - start))
+    print('Test time: %s seconds\n' % (end - start))
 
     evaluate.evaluate('confusion_matrix_bayes.csv')
