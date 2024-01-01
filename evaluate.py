@@ -40,13 +40,13 @@ def evaluate(csv_path: str, output_path='evaluation.csv') -> float:
     print("混淆矩阵: \n", df, "\n")
 
     eval_table = pd.DataFrame(np.zeros((3, len(constants.class_list) + 1)), columns=constants.class_list + ['整体'],
-                              index=['准确率', '召回率', 'F1'])
+                              index=['正确率', '召回率', 'F1'])
     precision_all = 0
     recall_all = 0
     for class_name in constants.class_list:
         precision = df.at[class_name, class_name] / df[class_name].sum()
         precision_all += precision
-        eval_table.at['准确率', class_name] = round(precision * 100, 2)
+        eval_table.at['正确率', class_name] = round(precision * 100, 2)
 
         recall = df.at[class_name, class_name] / df.loc[class_name, :].sum()
         recall_all += recall
@@ -59,7 +59,7 @@ def evaluate(csv_path: str, output_path='evaluation.csv') -> float:
     recall_all = recall_all / len(constants.class_list)
     f1_all = 2 * (precision_all * recall_all) / (precision_all + recall_all)
 
-    eval_table.at['准确率', '整体'] = round(precision_all * 100, 2)
+    eval_table.at['正确率', '整体'] = round(precision_all * 100, 2)
     eval_table.at['召回率', '整体'] = round(recall_all * 100, 2)
     eval_table.at['F1', '整体'] = round(f1_all * 100, 2)
 
