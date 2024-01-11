@@ -59,7 +59,9 @@ def predict_svc(test_npz, model_path, confusion_matrix_path: str, test_size: int
 
 
 if __name__ == '__main__':
-    train_svc(c=0.1, max_iter=100000, npz_path='coo_train.npz', output='pkls/svm_train.pkl', train_size=8000,
-              kernel='linear')
+    # train_svc(c=1, max_iter=100000, npz_path='coo_train.npz', output='pkls/svm_train.pkl', train_size=8000,
+    #           kernel='linear')
+    train_svc(c=1, gamma=0.1, npz_path='coo_train.npz', output='pkls/svm_train.pkl', train_size=8000,
+              kernel='rbf')
     predict_svc('coo_test.npz', 'pkls/svm_train.pkl', 'confusion_matrix_svm.csv', 5000)
     evaluate.evaluate('confusion_matrix_svm.csv')
