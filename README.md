@@ -1,4 +1,4 @@
-数据集来自 THUNews
+数据集来自 [THUNews](http://thuctc.thunlp.org/#%E8%8E%B7%E5%8F%96%E9%93%BE%E6%8E%A5)
 
 8000 篇训练集, 5000 篇测试集
 
